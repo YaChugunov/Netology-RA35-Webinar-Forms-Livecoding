@@ -2,7 +2,10 @@ import React, { useState } from 'react';
 import './style.css';
 
 function Feedback() {
-  const [name, setName] = useState('John Doe');
+  const [state, setState] = useState({
+    name: '',
+    checkbox: false,
+  });
   const [checkbox, setCheckbox] = useState(false);
 
   const formHandler = (e) => {
@@ -11,20 +14,20 @@ function Feedback() {
   };
 
   const inputHandler = (e) => {
-    e.preventDefault(); // При нажатии ничего не происходит
-    setName(e.target.value);
-    console.dir(e.target.value);
-  };
+    // e.preventDefault(); // При нажатии ничего не происходит
+    const inputName = e.target.name;
+    const type = e.target.type;
 
-  const checkboxHandler = (e) => {
-    e.preventDefault(); // При нажатии ничего не происходит
-    setCheckbox(e.target.checked);
+    const value = type === 'checkbox' ? e.target.checked : e.target.value;
+
+    setState({ [inputName]: value });
+    console.log(inputName, type);
     console.dir(e.target.checked);
   };
 
   return (
     <>
-      <pre>{JSON.stringify({ name, checkbox }, null, ' ')}</pre>
+      <pre>{JSON.stringify(state, null, ' ')}</pre>
       <form onSubmit={formHandler}>
         <label htmlFor="name">username</label>
         <input
@@ -32,9 +35,9 @@ function Feedback() {
           name="name"
           id="name"
           onChange={inputHandler}
-          value={name}
+          value={state.name}
         />
-        <input type="checkbox" onChange={checkboxHandler} />
+        <input name="checkbox" type="checkbox" onChange={inputHandler} />
         <button>Send</button>
       </form>
     </>
