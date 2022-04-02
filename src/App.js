@@ -96,7 +96,7 @@ function FileUploader() {
     e.preventDefault();
 
     const fr = new FileReader();
-    fr.addEventListener('load', (у) => {
+    fr.addEventListener('load', (e) => {
       console.dir(e.target.result);
     });
     fr.readAsDataURL(state.file);
