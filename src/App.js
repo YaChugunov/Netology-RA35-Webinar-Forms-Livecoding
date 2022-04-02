@@ -94,11 +94,18 @@ function FileUploader() {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    const data = new FormData();
-    [...state.file].forEach((file) => {
-      data.append('file', file);
+
+    const fr = new FileReader();
+    fr.addEventListener('load', (у) => {
+      console.dir(e.target.result);
     });
-    console.dir(data);
+    fr.readAsDataURL(state.file);
+
+    // const data = new FormData();
+    // [...state.file].forEach((file) => {
+    // data.append('file', file);
+    // });
+    // console.dir(data);
   };
 
   return (
