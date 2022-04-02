@@ -83,9 +83,39 @@ function Feedback() {
   );
 }
 
+function FileUploader() {
+  const [state, setState] = useState({
+    file: null,
+  });
+  const onChange = (e) => {
+    console.dir(e.target.files);
+    setState((pv) => ({ ...pv, file: e.target.files[0] }));
+  };
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    const data = new FormData();
+    [...state.file].forEach((file) => {
+      data.append('file', file);
+    });
+    console.dir(data);
+  };
+
+  return (
+    <>
+      <pre>{JSON.stringify(state)}</pre>
+      <form action="" onSubmit={onSubmit}>
+        <input type="file" onChange={onChange} />
+        <button>Send</button>
+      </form>
+    </>
+  );
+}
+
 export default function App() {
   return (
     // <Feedback />
-    <FeedbackClass />
+    // <FeedbackClass />
+    <FileUploader />
   );
 }
