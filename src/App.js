@@ -1,10 +1,40 @@
 import React, { useState } from 'react';
 import './style.css';
 
+class FeedbackClass extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: '',
+      checkbox: false,
+    };
+  }
+
+  changeName(e) {
+    e.preventDefault();
+    this.setState({ name: e.target.value });
+  }
+
+  render() {
+    return (
+      <>
+        <pre>{JSON.stringify(this.state, null, ' ')}</pre>
+        <input
+          type="text"
+          onChange={(e) => {
+            this.changeName(e);
+          }}
+        />
+      </>
+    );
+  }
+}
+
 function Feedback() {
-  const [state, setState] = useState({
+  const [form, setForm] = useState({
     name: '',
-    checkbox: false,
+    checkbox: true,
+    select: null,
   });
   const [checkbox, setCheckbox] = useState(false);
 
@@ -20,14 +50,14 @@ function Feedback() {
 
     const value = type === 'checkbox' ? e.target.checked : e.target.value;
 
-    setState({ [inputName]: value });
+    setForm((prevState) => ({ ...prevState, [inputName]: value }));
     console.log(inputName, type);
     console.dir(e.target.checked);
   };
 
   return (
     <>
-      <pre>{JSON.stringify(state, null, ' ')}</pre>
+      <pre>{JSON.stringify(form, null, ' ')}</pre>
       <form onSubmit={formHandler}>
         <label htmlFor="name">username</label>
         <input
@@ -35,9 +65,18 @@ function Feedback() {
           name="name"
           id="name"
           onChange={inputHandler}
-          value={state.name}
+          value={form.name}
         />
-        <input name="checkbox" type="checkbox" onChange={inputHandler} />
+        <input
+          name="checkbox"
+          type="checkbox"
+          checked={form.checkbox}
+          onChange={inputHandler}
+        />
+        <select name="select" id="select" onChange={inputHandler}>
+          <option value="id1">Item1</option>
+          <option value="id2">Item2</option>
+        </select>
         <button>Send</button>
       </form>
     </>
@@ -45,5 +84,8 @@ function Feedback() {
 }
 
 export default function App() {
-  return <Feedback />;
+  return (
+    // <Feedback />
+    <FeedbackClass />
+  );
 }
