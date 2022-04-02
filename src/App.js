@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import './style.css';
 
 class FeedbackClass extends React.Component {
@@ -119,10 +119,25 @@ function FileUploader() {
   );
 }
 
+function InputRef() {
+  const inputRef = useRef();
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    console.log(inputRef.current.files);
+  };
+  return (
+    <form action="" onSubmit={onSubmit}>
+      <input ref={inputRef} type="file" />
+      <button>Send</button>
+    </form>
+  );
+}
 export default function App() {
   return (
     // <Feedback />
     // <FeedbackClass />
-    <FileUploader />
+    // <FileUploader />
+    <InputRef />
   );
 }
