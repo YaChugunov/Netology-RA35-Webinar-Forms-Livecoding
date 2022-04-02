@@ -13,7 +13,7 @@ function Feedback() {
   const inputHandler = (e) => {
     e.preventDefault(); // При нажатии ничего не происходит
     setName(e.target.value);
-    console.dir(e.target);
+    console.dir(e.target.value);
   };
 
   const checkboxHandler = (e) => {
