@@ -1,25 +1,40 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './style.css';
 
 function Feedback() {
-  const [name, setName] = useState('');
+  const [name, setName] = useState('John Doe');
+  const [checkbox, setCheckbox] = useState(false);
 
   const formHandler = (e) => {
     e.preventDefault(); // При нажатии ничего не происходит
-    console.dir(e.target);
+    console.dir(name);
   };
 
   const inputHandler = (e) => {
     e.preventDefault(); // При нажатии ничего не происходит
+    setName(e.target.value);
     console.dir(e.target);
+  };
+
+  const checkboxHandler = (e) => {
+    e.preventDefault(); // При нажатии ничего не происходит
+    setCheckbox(e.target.checked);
+    console.dir(e.target.checked);
   };
 
   return (
     <>
-      <pre>{JSON.stringify(name)}</pre>
+      <pre>{JSON.stringify({ name, checkbox }, null, ' ')}</pre>
       <form onSubmit={formHandler}>
         <label htmlFor="name">username</label>
-        <input type="text" name="name" id="name" onChange={inputHandler} />
+        <input
+          type="text"
+          name="name"
+          id="name"
+          onChange={inputHandler}
+          value={name}
+        />
+        <input type="checkbox" onChange={checkboxHandler} />
         <button>Send</button>
       </form>
     </>
