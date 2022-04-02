@@ -1,3 +1,16 @@
-h1, p {
+h1,
+p {
   font-family: Lato;
+}
+label {
+  display: block;
+  margin-bottom: 10px;
+}
+input {
+  display: block;
+  margin-bottom: 10px;
+}
+button {
+  display: block;
+  margin-bottom: 10px;
 }
