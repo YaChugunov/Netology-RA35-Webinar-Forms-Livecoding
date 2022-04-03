@@ -133,11 +133,24 @@ function InputRef() {
     </form>
   );
 }
+
+function Component() {
+  const list = (
+    <>
+      <li>Item 1</li>
+      <li>Item 2</li>
+    </>
+  );
+
+  return <ul>{list}</ul>;
+}
+
 export default function App() {
   return (
     // <Feedback />
     // <FeedbackClass />
     // <FileUploader />
-    <InputRef />
+    // <InputRef />
+    <Component />
   );
 }
